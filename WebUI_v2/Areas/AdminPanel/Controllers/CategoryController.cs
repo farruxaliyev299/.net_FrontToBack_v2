@@ -69,6 +69,38 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
             return View(category);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> Update(int? id , Category category)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            var categoryDb = _context.Categories.Where(ctg => !ctg.isDeleted).FirstOrDefault(ctg => ctg.Id == id);
+            if (categoryDb == null)
+            {
+                return NotFound();
+            }
+            if (categoryDb.Name.ToLower() == category.Name.ToLower())
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            bool isExist = false;
+            isExist = categories.Any(ctg => ctg.Name.ToLower() == category.Name.ToLower());
+            if (isExist)
+            {
+                ModelState.AddModelError("Name", $"{category.Name} is already exist");
+                return View();
+            }
+            categoryDb.Name = category.Name;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult Delete()
         {
             return View();
