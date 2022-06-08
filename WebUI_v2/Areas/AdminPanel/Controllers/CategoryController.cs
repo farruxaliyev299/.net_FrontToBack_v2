@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebUI_v2.DAL;
@@ -11,10 +13,12 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
     public class CategoryController : Controller
     {
         private AppDbContext _context { get; }
+        public static IEnumerable<Category> categories { get; set; }
 
         public CategoryController(AppDbContext context)
         {
             _context = context;
+            categories = _context.Categories.Where(ctg => !ctg.isDeleted);
         }
         public IActionResult Index()
         {
@@ -32,6 +36,20 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
         {
             if (!ModelState.IsValid)
             {
+                return View();
+            }
+            bool isExist = false;
+            foreach (var ctg in categories)
+            {
+                if(ctg.Name.ToLower() == category.Name.ToLower())
+                {
+                    isExist = true;
+                    break;
+                }
+            }
+            if (isExist)
+            {
+                ModelState.AddModelError("Name", $"{category.Name} is already exist");
                 return View();
             }
             Category newCategory = new Category
