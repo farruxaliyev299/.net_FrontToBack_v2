@@ -141,3 +141,9 @@ D:\.NET\Fiorella\WebUI_v2\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dl
 D:\.NET\Fiorella\WebUI_v2\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\.NET\Fiorella\WebUI_v2\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\.NET\Fiorella\WebUI_v2\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Areas\AdminPanel\Views\_ViewImports.cshtml.g.cs
+D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Areas\AdminPanel\Views\_ViewStart.cshtml.g.cs
+D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Areas\AdminPanel\Views\Dashboard\Index.cshtml.g.cs
+D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Areas\AdminPanel\Views\Shared\_AdminLayout.cshtml.g.cs
+D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Areas\AdminPanel\Views\Category\Index.cshtml.g.cs
+D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Areas\AdminPanel\Views\Category\Add.cshtml.g.cs

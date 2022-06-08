@@ -46,8 +46,12 @@ namespace WebUI_v2
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    "default",
-                    "{controller=home}/{action=index}/{id?}"
+                    name: "area",
+                    pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
+                );
+                endpoints.MapControllerRoute(
+                    name:"default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
             });
         }
