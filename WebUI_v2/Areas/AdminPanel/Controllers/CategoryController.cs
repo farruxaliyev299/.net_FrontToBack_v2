@@ -39,14 +39,7 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
                 return View();
             }
             bool isExist = false;
-            foreach (var ctg in categories)
-            {
-                if(ctg.Name.ToLower() == category.Name.ToLower())
-                {
-                    isExist = true;
-                    break;
-                }
-            }
+            isExist = categories.Any(ctg => ctg.Name.ToLower() == category.Name.ToLower());
             if (isExist)
             {
                 ModelState.AddModelError("Name", $"{category.Name} is already exist");
@@ -59,6 +52,21 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
             await _context.Categories.AddAsync(newCategory);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Update(int? id)
+        {
+            if(id == null)
+            {
+                return BadRequest();
+            }
+
+            var category = _context.Categories.FirstOrDefault(ctg => ctg.Id == id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
         }
 
         public IActionResult Delete()
