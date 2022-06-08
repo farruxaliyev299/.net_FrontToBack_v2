@@ -61,7 +61,7 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
                 return BadRequest();
             }
 
-            var category = _context.Categories.FirstOrDefault(ctg => ctg.Id == id);
+            var category = _context.Categories.Where(ctg => !ctg.isDeleted).FirstOrDefault(ctg => ctg.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -70,11 +70,6 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
         }
 
         public IActionResult Delete()
-        {
-            return View();
-        }
-
-        public IActionResult Edit()
         {
             return View();
         }
