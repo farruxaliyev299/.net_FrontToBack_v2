@@ -9,7 +9,7 @@ namespace WebUI_v2.Models
         public int Id { get; set; }
         public string Url { get; set; }
 
-        [NotMapped,Required]
+        [NotMapped,Required(ErrorMessage ="Slider field can't been added empty")]
         public IFormFile Photo { get; set; }
     }
 }
