@@ -39,7 +39,7 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
                 return View();
             }
             bool isExist = false;
-            isExist = categories.Any(ctg => ctg.Name.ToLower() == category.Name.ToLower());
+            isExist = categories.Where(ctg => !ctg.isDeleted).Any(ctg => ctg.Name.ToLower() == category.Name.ToLower());
             if (isExist)
             {
                 ModelState.AddModelError("Name", $"{category.Name} is already exist");
@@ -90,7 +90,7 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
             }
 
             bool isExist = false;
-            isExist = categories.Any(ctg => ctg.Name.ToLower() == category.Name.ToLower());
+            isExist = categories.Where(ctg => !ctg.isDeleted).Any(ctg => ctg.Name.ToLower() == category.Name.ToLower());
             if (isExist)
             {
                 ModelState.AddModelError("Name", $"{category.Name} is already exist");
@@ -101,9 +101,21 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            var categoryDb = _context.Categories.Where(ctg => !ctg.isDeleted).FirstOrDefault(ctg => ctg.Id == id);
+            if (categoryDb == null)
+            {
+                return NotFound();
+            }
+            categoryDb.isDeleted = true;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
