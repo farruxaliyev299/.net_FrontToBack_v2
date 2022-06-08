@@ -1,5 +1,5 @@
-﻿@using WebUI_v2.ViewModels.Categories
-@model CategoryAddVM
+﻿@using WebUI_v2.Models
+@model Slider
 @{
     ViewData["Title"] = "Add";
 }
@@ -8,12 +8,12 @@
     <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Add Category</h4>
+                  <h4 class="card-title">Add Slider</h4>
                   <form class="forms-sample" method="post">
                     <div class="form-group">
-                      <label asp-for="Name">Category Name</label>
-                      <input asp-for="Name" class="form-control" placeholder="Insert the Category Name" \>
-                      <span class="text-danger" asp-validation-for="Name"></span>
+                      <label asp-for="Photo">Select Slider</label>
+                      <input asp-for="Photo" class="form-control" placeholder="Insert the Category Name" \>
+                      <span class="text-danger" asp-validation-for="Photo"></span>
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Add</button>
                     <a class="btn btn-light">Cancel</a>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebUI_v2.DAL;
+using WebUI_v2.Models;
 
 namespace WebUI_v2.Areas.AdminPanel.Controllers
 {
@@ -15,6 +16,22 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
         public IActionResult Index()
         {
             return View(_context.Sliders);
+        }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult Add(Slider slider)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
         }
     }
 }
