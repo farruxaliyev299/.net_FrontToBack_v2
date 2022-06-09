@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using WebUI_v2.DAL;
 using WebUI_v2.Models;
+using WebUI_v2.Utilities;
 
 namespace WebUI_v2.Areas.AdminPanel.Controllers
 {
@@ -38,12 +39,12 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
             {
                 return View();
             }
-            if(slider.Photo.Length/1024 > 200)
+            if(!slider.Photo.CheckFileSize(800))
             {
                 ModelState.AddModelError("Photo", "Maximum file size is 200 Kb!");
                 return View();
             }
-            if (!slider.Photo.ContentType.Contains("image/"))
+            if (!slider.Photo.CheckFileType("image/"))
             {
                 ModelState.AddModelError("Photo", "File type must be image");
                 return View();
