@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using WebUI_v2.DAL;
 using WebUI_v2.Models;
 
@@ -31,7 +32,7 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult Add(Slider slider)
+        public async Task<IActionResult> Add(Slider slider)
         {
             if (!ModelState.IsValid)
             {
@@ -48,11 +49,15 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
                 return View();
             }
             var fileName = Guid.NewGuid().ToString() + slider.Photo.FileName;
-            using (FileStream fileStream = new FileStream(@"D:\.NET\Fiorella\WebUI_v2\wwwroot\img\" + fileName, FileMode.Create))
+            var resultPath = Path.Combine(_env.WebRootPath, "img", fileName);
+            using (FileStream fileStream = new FileStream(resultPath , FileMode.Create))
             {
                 slider.Photo.CopyTo(fileStream);
             }
-            return Content(_env.WebRootPath);
+            slider.Url = fileName;
+            await _context.Sliders.AddAsync(slider);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
