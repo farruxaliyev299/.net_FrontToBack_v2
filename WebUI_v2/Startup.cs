@@ -15,7 +15,7 @@ namespace WebUI_v2
 {
     public class Startup
     {
-        private IConfiguration _config { get; set; }
+        private IConfiguration _config { get; }
 
         public Startup(IConfiguration config)
         {

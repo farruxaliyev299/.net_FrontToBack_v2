@@ -1,21 +1,22 @@
 ﻿@using WebUI_v2.Models
 @model Slider
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Update";
 }
 
 <div class="row">
     <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Add Slider</h4>
+                  <h4 class="card-title">Update Slider</h4>
+                  <img src="~/img/@Model.Url" width="150px" style="width: 500px;margin:20px 50px;border-radius:50%";/>
                   <form class="forms-sample" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                       <label asp-for="Photo">Select Slider</label>
-                      <input asp-for="Photo" class="form-control" placeholder="Add Image file" \>
+                      <input asp-for="Photo" class="form-control" placeholder="Update Image file"\>
                       <span class="text-danger" asp-validation-for="Photo"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary mr-2">Add</button>
+                    <button type="submit" class="btn btn-warning mr-2">Save</button>
                     <a class="btn btn-light">Cancel</a>
                   </form>
                 </div>

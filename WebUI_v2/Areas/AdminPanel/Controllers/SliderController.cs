@@ -39,7 +39,7 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
             {
                 return View();
             }
-            if(!slider.Photo.CheckFileSize(800))
+            if(!slider.Photo.CheckFileSize(200))
             {
                 ModelState.AddModelError("Photo", "Maximum file size is 200 Kb!");
                 return View();
@@ -49,12 +49,12 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
                 ModelState.AddModelError("Photo", "File type must be image");
                 return View();
             }
-            var fileName = Guid.NewGuid().ToString() + slider.Photo.FileName;
-            var resultPath = Path.Combine(_env.WebRootPath, "img", fileName);
-            using (FileStream fileStream = new FileStream(resultPath , FileMode.Create))
-            {
-                slider.Photo.CopyTo(fileStream);
-            }
+            //var fileName = Guid.NewGuid().ToString() + slider.Photo.FileName;
+            //var resultPath = Utility.GetPath(_env.WebRootPath, "img", fileName);
+            //using (FileStream fileStream = new FileStream(resultPath , FileMode.Create))
+            //{
+            //    slider.Photo.CopyTo(fileStream);
+            //}
             slider.Url = await slider.Photo.SaveFileAsync(_env.WebRootPath, "img");
             await _context.Sliders.AddAsync(slider);
             await _context.SaveChangesAsync();
@@ -67,17 +67,69 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
             {
                 return BadRequest();
             }
-            var slider = _context.Sliders.Find(id);
-            if(slider == null)
+            var sliderDb = _context.Sliders.Find(id);
+            if(sliderDb == null)
             {
                 return NotFound();
             }
-            var removePath = Utility.GetPath(_env.WebRootPath, "img", slider.Url);
+            var removePath = Utility.GetPath(_env.WebRootPath, "img", sliderDb.Url);
             if (System.IO.File.Exists(removePath))
             {
                 System.IO.File.Delete(removePath);
             }
-            _context.Sliders.Remove(slider);
+            _context.Sliders.Remove(sliderDb);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Update(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            var slider = _context.Sliders.Find(id);
+            if (slider == null)
+            {
+                return NotFound();
+            }
+            return View(slider);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int? id,Slider slider)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            var sliderDb = _context.Sliders.Find(id);
+            if(sliderDb == null)
+            {
+                return NotFound();
+            }
+            var removePath = Utility.GetPath(_env.WebRootPath, "img", sliderDb.Url);
+            if (System.IO.File.Exists(removePath))
+            {
+                System.IO.File.Delete(removePath);
+            }
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            if (!slider.Photo.CheckFileSize(200))
+            {
+                ModelState.AddModelError("Photo", "Maximum file size is 200 Kb!");
+                return View();
+            }
+            if (!slider.Photo.CheckFileType("image/"))
+            {
+                ModelState.AddModelError("Photo", "File type must be image");
+                return View();
+            }
+            slider.Url = await slider.Photo.SaveFileAsync(_env.WebRootPath, "img");
+            sliderDb.Url = slider.Url;
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
