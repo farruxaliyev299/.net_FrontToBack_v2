@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace WebUI_v2.Utilities
 {
@@ -16,26 +17,16 @@ namespace WebUI_v2.Utilities
             return file.ContentType.Contains(type);
         }
 
-        public static string SaveFile(this IFormFile file, string root , string[] folders)
+        public static async Task<string> SaveFileAsync(this IFormFile file, string root , params string[] folders)
         {
             var fileName = Guid.NewGuid().ToString() + file.FileName;
 
-            var resultPath = Path.Combine(GetPath(root,folders), fileName);
+            var resultPath = Path.Combine(Utility.GetPath(root,folders), fileName);
             using (FileStream fileStream = new FileStream(resultPath, FileMode.Create))
             {
-                file.CopyTo(fileStream);
+                await file.CopyToAsync(fileStream);
             }
             return fileName;
-        }
-
-        private static string GetPath(string root,string[] folders)
-        {
-            string resultPath = root;
-            foreach(string folder in folders)
-            {
-                resultPath = Path.Combine(resultPath, folder);    
-            }
-            return resultPath;
         }
     }
 }

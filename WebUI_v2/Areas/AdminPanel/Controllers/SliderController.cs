@@ -55,9 +55,30 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
             {
                 slider.Photo.CopyTo(fileStream);
             }
-            slider.Url = fileName;
+            slider.Url = await slider.Photo.SaveFileAsync(_env.WebRootPath, "img");
             await _context.Sliders.AddAsync(slider);
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if(id == null)
+            {
+                return BadRequest();
+            }
+            var slider = _context.Sliders.Find(id);
+            if(slider == null)
+            {
+                return NotFound();
+            }
+            var removePath = Utility.GetPath(_env.WebRootPath, "img", slider.Url);
+            if (System.IO.File.Exists(removePath))
+            {
+                System.IO.File.Delete(removePath);
+            }
+            _context.Sliders.Remove(slider);
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
     }
