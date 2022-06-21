@@ -151,3 +151,15 @@ D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Areas\AdminPanel\Views\C
 D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Areas\AdminPanel\Views\Slider\Index.cshtml.g.cs
 D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Areas\AdminPanel\Views\Slider\Add.cshtml.g.cs
 D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Areas\AdminPanel\Views\Slider\Update.cshtml.g.cs
+D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Header\Default.cshtml.g.cs
+D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Footer\Default.cshtml.g.cs
+D:\.NET\Fiorella\WebUI_v2\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\.NET\Fiorella\WebUI_v2\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\.NET\Fiorella\WebUI_v2\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\.NET\Fiorella\WebUI_v2\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
+D:\.NET\Fiorella\WebUI_v2\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
+D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
+D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AccountPartial.cshtml.g.cs
+D:\.NET\Fiorella\WebUI_v2\obj\Debug\netcoreapp3.1\Razor\Areas\AdminPanel\Views\User\Index.cshtml.g.cs

@@ -22,7 +22,7 @@ namespace WebUI_v2.Areas.AdminPanel.Controllers
         }
         public IActionResult Index()
         {
-            return View(_context.Categories.Where(category => !category.isDeleted));
+            return View(categories);
         }
 
         public IActionResult Add()
